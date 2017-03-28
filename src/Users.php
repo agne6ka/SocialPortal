@@ -15,7 +15,7 @@ class Users
         $this->hashed_password = '';
     }
 
-/** Getters **/
+    /** Getters **/
 
     /**
      * @return int
@@ -49,7 +49,7 @@ class Users
         return $this->hashed_password;
     }
 
-/** Setters **/
+    /** Setters **/
 
     /**
      * @param int $id
@@ -105,7 +105,7 @@ class Users
     {
         $sql = "SELECT * FROM Users WHERE id=$id";
         $result = $conn->query($sql);
-        if($result == true && $result->num_rows == 1){
+        if ($result == true && $result->num_rows == 1) {
             $row = $result->fetch_assoc();
             $loadedUser = new Users();
             $loadedUser->id = $row['id'];
@@ -115,5 +115,23 @@ class Users
             return $loadedUser;
         }
         return null;
+    }
+
+    static public function loadAllUsers(mysqli $connection)
+    {
+        $sql = "SELECT * FROM Users";
+        $ret = [];
+        $result = $connection->query($sql);
+        if ($result == true && $result->num_rows != 0) {
+            foreach ($result as $row) {
+                $loadedUser = new Users();
+                $loadedUser->id = $row['id'];
+                $loadedUser->username = $row['username'];
+                $loadedUser->hashed_password = $row['hashed_password'];
+                $loadedUser->email = $row['email'];
+                $ret[] = $loadedUser;
+            }
+        }
+        return $ret;
     }
 }

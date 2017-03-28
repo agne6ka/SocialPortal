@@ -11,3 +11,4 @@ $user_1->saveToDB($conn);
 
 var_dump($user_1->loadUserById($conn, 2));
 var_dump($user_1->loadUserById($conn, 3));
+var_dump($user_1->loadAllUsers($conn));
