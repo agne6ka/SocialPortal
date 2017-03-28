@@ -51,13 +51,6 @@ class Users
 
     /** Setters **/
 
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
 
     /**
      * @param string $username
@@ -95,6 +88,12 @@ class Users
             $result = $conn->query($sql);
             if ($result == true) {
                 $this->id = $conn->insert_id;
+                return true;
+            }
+        } else {
+            $sql = "UPDATE Users SET username='$this->username',email='$this->email',hashed_password='$this->hashed_password'WHERE id=$this->id";
+            $result = $conn->query($sql);
+            if ($result == true) {
                 return true;
             }
         }
