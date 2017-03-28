@@ -51,7 +51,6 @@ class Users
 
     /** Setters **/
 
-
     /**
      * @param string $username
      */
@@ -132,5 +131,19 @@ class Users
             }
         }
         return $ret;
+    }
+
+    public function delete(mysqli $conn)
+    {
+        if ($this->id != -1) {
+            $sql = "DELETE FROM Users WHERE id=$this->id";
+            $result = $conn->query($sql);
+            if ($result == true) {
+                $this->id = -1;
+                return true;
+            }
+            return false;
+        }
+        return true;
     }
 }
