@@ -100,4 +100,20 @@ class Users
         }
         return false;
     }
+
+    static public function loadUserById(mysqli $conn, $id)
+    {
+        $sql = "SELECT * FROM Users WHERE id=$id";
+        $result = $conn->query($sql);
+        if($result == true && $result->num_rows == 1){
+            $row = $result->fetch_assoc();
+            $loadedUser = new Users();
+            $loadedUser->id = $row['id'];
+            $loadedUser->username = $row['username'];
+            $loadedUser->hashed_password = $row['hashed_password'];
+            $loadedUser->email = $row['email'];
+            return $loadedUser;
+        }
+        return null;
+    }
 }

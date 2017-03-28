@@ -8,4 +8,6 @@ $user_1->setUsername('januszek');
 $user_1->setEmail('januszek666@gmail.com');
 $user_1->setHashedPassword('Dupa1');
 $user_1->saveToDB($conn);
-var_dump($user_1);
+
+var_dump($user_1->loadUserById($conn, 2));
+var_dump($user_1->loadUserById($conn, 3));
