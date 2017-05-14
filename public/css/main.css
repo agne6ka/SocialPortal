@@ -1,0 +1,49 @@
+.welcome {
+    background: url('../img/social.jpg') #161618 no-repeat;
+    background-size: 100%;
+    color: #ffffff;
+    text-shadow: 1px 1px 8px black;
+}
+.welcome .hero {
+    margin: 50px auto 10px;
+}
+.welcome .hero h1 {
+    font-weight: 600;
+}
+.welcome .form {
+    margin: 50px auto;
+}
+.welcome .form_login, .welcome .form_register {
+    background-color: rgba(0, 0, 0, 0.34);
+    border-radius: 8px;
+    padding: 30px;
+}
+.welcome .form h2{
+    margin: 0 0 30px;
+}
+.posts .nav {
+    background: black;
+    margin-bottom: 50px;
+}
+.posts .nav li {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 10px;
+}
+.posts .user-info {
+    min-height: 200px;
+    background-color: #000000;
+    border-radius: 14px;
+    color: #ffffff;
+}
+.posts .user-info p {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.posts .user-info_ico {
+    margin: 10px auto;
+    width: 50%;
+    display: block;
+}
