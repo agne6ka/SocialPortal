@@ -2,7 +2,10 @@
 /**
  *  Connect to database
  */
-require_once "../config/database.php";
+
+define("ROOT", __DIR__ . "/../../");
+
+require_once ( ROOT . "config/database.php" );
 
 $conn = new mysqli($serverName, $userName, $password, $baseName);
 
