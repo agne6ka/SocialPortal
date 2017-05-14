@@ -38,7 +38,9 @@ $user->setHashedPassword($password);
 $userSaved = $user->saveToDB($conn);
 
 if ($userSaved === True) {
-    echo "<p>User was added successfully: $name $email $password</p>";
+    session_start();
+    $_SESSION['loggedUser'] = [$getUserName, $getUserId, $email];
+    header('Location: //localhost/Workshops/SocialPortal/public/posts.php');
 }else {
     echo "<p>Something went wrong: $name $email $password</p>";
 }

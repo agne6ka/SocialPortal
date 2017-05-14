@@ -2,7 +2,6 @@
     $title = 'Social Web App - Welcome';
     include ( __DIR__ . '/template/head.php' );
     require_once ( __DIR__ . '/../src/utils/connect.php' );
-    require_once ( __DIR__ . '/../src/Posts.php' );
 ?>
 
 <body class="welcome">
@@ -15,11 +14,11 @@
             <form action="../src/modules/login.php" method="post">
                 <div class="form-group">
                     <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" placeholder="jan.kowalski@mail.com">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="jan.kowalski@mail.com">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="password">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="password">
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>

@@ -79,6 +79,11 @@ class Users
         $this->hashed_password = $new_password;
     }
 
+    public function verifieHashedPassword($userPassword, $hashed_password)
+    {
+        return password_verify($userPassword, $hashed_password);
+    }
+
     public function saveToDB(mysqli $conn)
     {
         if ($this->id == -1) {
@@ -99,9 +104,9 @@ class Users
         return false;
     }
 
-    static public function loadUserById(mysqli $conn, $id)
+    static public function loadUserByEmail(mysqli $conn, $userEmail)
     {
-        $sql = "SELECT * FROM Users WHERE id=$id";
+        $sql = "SELECT * FROM Users WHERE email='$userEmail'";
         $result = $conn->query($sql);
         if ($result == true && $result->num_rows == 1) {
             $row = $result->fetch_assoc();

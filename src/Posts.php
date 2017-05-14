@@ -6,13 +6,17 @@ class Posts
 {
     private $id;
     private $user_id;
-    private $message;
+    private $post_tittle;
+    private $post_text;
+    private $post_date;
 
     public function __construct()
     {
         $this->id = -1;
         $this->user_id = '';
-        $this->message = '';
+        $this->post_tittle = '';
+        $this->post_text = '';
+        $this->post_date = '';
     }
 
     /** Getters **/
@@ -28,36 +32,64 @@ class Posts
     /**
      * @return string
      */
-    public function getMessage()
-    {
-        return $this->message;
-    }
-
-    /**
-     * @return string
-     */
     public function getUserId()
     {
         return $this->user_id;
     }
 
+    /**
+     * @return string
+     */
+    public function getPostTittle()
+    {
+        return $this->post_tittle;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPostText()
+    {
+        return $this->post_text;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPostDate()
+    {
+        return $this->post_date;
+    }
 
     /** Setters **/
 
     /**
-     * @param string $message
+     * @param string $user_id
      */
-    public function setMessage($message)
+    public function setUserId($user_id)
     {
-        $this->message = $message;
+        $this->user_id = $user_id;
     }
 
     /**
-     * @param string $user_id
+     * @param string $post_tittle
      */
-    public function setUserId($user_instance)
+    public function setPostTittle($post_tittle)
     {
-        $this->user_id = $user_instance->getId();
+        $this->post_tittle = $post_tittle;
+    }
+
+    /**
+     * @param string $post_text
+     */
+    public function setPostText($post_text)
+    {
+        $this->post_text = $post_text;
+    }
+
+    public function setPostDate()
+    {
+        $this->post_date = date('Y-m-d');
     }
 
     /** Methods **/
@@ -65,7 +97,7 @@ class Posts
     public function createPost(mysqli $conn)
     {
         if ($this->id == -1) {
-            $sql = "INSERT INTO Posts(user_id, message)VALUES ('$this->user_id','$this->message')";
+            $sql = "INSERT INTO Posts(user_id, post_tittle, post_text, post_date)VALUES ('$this->user_id','$this->post_tittle','$this->post_text','$this->post_date')";
 
             $result = $conn->query($sql);
             if ($result == true) {
@@ -73,7 +105,7 @@ class Posts
                 return true;
             }
         } else {
-            $sql = "UPDATE Posts SET user_id='$this->user_id', messages='$this->message'WHERE id=$this->id";
+            $sql = "UPDATE Posts SET user_id='$this->user_id', post_tittle='$this->post_tittle', post_text='$this->post_text', post_date='$this->post_date'WHERE id=$this->id";
             $result = $conn->query($sql);
             if ($result == true) {
                 return true;
@@ -91,7 +123,9 @@ class Posts
             $loadedPost = new Posts();
             $loadedPost->id = $row['id'];
             $loadedPost->user_id = $row['user_id'];
-            $loadedPost->message = $row['message'];
+            $loadedPost->post_tittle = $row['post_tittle'];
+            $loadedPost->post_text = $row['post_text'];
+            $loadedPost->post_date = $row['post_date'];
             return $loadedPost;
         }
         return null;
@@ -107,7 +141,9 @@ class Posts
                 $loadedPost = new Posts();
                 $loadedPost->id = $row['id'];
                 $loadedPost->user_id = $row['user_id'];
-                $loadedPost->message = $row['message'];
+                $loadedPost->post_tittle = $row['post_tittle'];
+                $loadedPost->post_text = $row['post_text'];
+                $loadedPost->post_date = $row['post_date'];
                 $ret[] = $loadedPost;
             }
         }
