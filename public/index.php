@@ -42,5 +42,5 @@
             </form>
         </div>
     </section>
-</body>
-</html>
+<?php
+include 'template/footer.php';

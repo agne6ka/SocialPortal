@@ -1,3 +1,6 @@
+.visually-hidden {
+    display: none;
+}
 .welcome {
     background: url('../img/social.jpg') #161618 no-repeat;
     background-size: 100%;

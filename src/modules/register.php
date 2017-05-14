@@ -42,7 +42,7 @@ if ($userSaved === True) {
     $_SESSION['loggedUser'] = [$getUserName, $getUserId, $email];
     header('Location: //localhost/Workshops/SocialPortal/public/posts.php');
 }else {
-    echo "<p>Something went wrong: $name $email $password</p>";
+    echo "<p>Something went wrong. Please try again.</p>";
 }
 
 $conn->close();

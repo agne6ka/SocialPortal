@@ -120,6 +120,20 @@ class Users
         return null;
     }
 
+    static public function loadUserById(mysqli $conn, $userId)
+    {
+        $sql = "SELECT * FROM Users WHERE id=$userId";
+        $result = $conn->query($sql);
+        if ($result == true && $result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            $loadedUser = new Users();
+            $loadedUser->id = $row['id'];
+            $loadedUser->username = $row['username'];
+            return $loadedUser;
+        }
+        return null;
+    }
+
     static public function loadAllUsers(mysqli $connection)
     {
         $sql = "SELECT * FROM Users";
