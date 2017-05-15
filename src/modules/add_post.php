@@ -9,7 +9,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $text = "";
     $id ="";
 
-    var_dump($_POST);
     if (strlen(trim($_POST['tittle'])) >= 3 && strlen(trim($_POST['tittle'])) <= 25){
         $tittle = $_POST['tittle'];
     }else {
@@ -27,7 +26,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     echo $tittle . ' ' . $text;
     $userId = $_SESSION['loggedUser'][1];
-    var_dump($_SESSION['loggedUser']);
+
 } else {
     echo 'Check request method';
     die;
@@ -35,21 +34,23 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 if ($id != ""){
     echo '<p>Edit post.</p>';
+    $post = new Posts();
+    $post = $post->loadPostById($conn, $id);
 } else {
-    echo '<p>Add new post</p>';
-//    $post = new Posts();
-//    $post->setUserId($userId);
-//    $post->setPostTittle($tittle);
-//    $post->setPostText($text);
-//    $post->setPostDate();
-//
-//    $createPost = $post->createPost($conn);
-//
-//    if ( $createPost === True){
-//        header('Location: //localhost/Workshops/SocialPortal/public/posts.php');
-//    }else {
-//        echo 'Something went wrong';
-//    }
+    $post = new Posts();
+}
+
+$post->setUserId($userId);
+$post->setPostTittle($tittle);
+$post->setPostText($text);
+$post->setPostDate();
+
+$createPost = $post->createPost($conn);
+
+if ( $createPost === True){
+    header('Location: //localhost/Workshops/SocialPortal/public/posts.php');
+}else {
+    echo 'Something went wrong';
 }
 
 $conn->close();

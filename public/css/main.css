@@ -24,14 +24,32 @@
 .welcome .form h2{
     margin: 0 0 30px;
 }
+.posts {
+    margin-bottom: 60px;
+}
 .posts .nav {
     background: black;
     margin-bottom: 50px;
+}
+.posts .btn {
+    margin-right: 15px;
 }
 .posts .nav li {
     display: inline-block;
     margin-right: 10px;
     padding: 10px;
+}
+.posts .post-delete{
+    text-align: center;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    background: #fbfbfb;
+    color: #424242;
+    transform: translate(-50%);
+    z-index: 100;
+    padding: 90px;
+    box-shadow: 1px 1px 10px black;
 }
 .posts .user-info {
     min-height: 200px;

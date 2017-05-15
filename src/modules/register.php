@@ -8,8 +8,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = "";
     $password = "";
 
-    var_dump($_POST);
-
     if ((isset($_POST['name']) === true && strlen(trim($_POST['name'])) > 5)){
         $name = $_POST['name'];
     }else {
