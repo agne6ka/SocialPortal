@@ -3,9 +3,10 @@ var $edit = document.getElementsByClassName('btn-edit'),
     $postId = document.getElementById('post-id'),
     $removeId = document.getElementById('remove-id'),
     $deletePost = document.querySelector('.post-delete'),
-    $btnNo = $deletePost.querySelector('#cancel'),
     $tittle = document.getElementById('tittle'),
-    $text = document.getElementById('text');
+    $text = document.getElementById('text'),
+    $showMessage = document.getElementById('show-msg'),
+    $friendItems = document.querySelectorAll('.friend-info_item');
 
 
 for(var $i in $edit){
@@ -35,10 +36,23 @@ for(var $i in $delete){
     }
 }
 
-$btnNo.addEventListener('click', function (e) {
-    e.preventDefault();
+for(var $i in $friendItems){
+    if ($friendItems[$i].hasAttribute){
 
-    console.log('clicked');
-    $removeId.value = '';
-    $deletePost.classList.add('hidden');
-});
+        $friendItems[$i].addEventListener('click', function () {
+            console.log('clicked');
+            $showMessage.click();
+        });
+    }
+}
+if ($deletePost){
+    var $btnNo = $deletePost.querySelector('#cancel');
+
+    $btnNo.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        console.log('clicked');
+        $removeId.value = '';
+        $deletePost.classList.add('hidden');
+    });
+}

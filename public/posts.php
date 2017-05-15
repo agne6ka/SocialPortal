@@ -12,7 +12,7 @@
 <body class="posts" xmlns="http://www.w3.org/1999/html">
     <section class="nav">
         <ul>
-            <li><a href="#">Messages</a></li>
+            <li><a href="messages.php">Messages</a></li>
             <li><a href="#">My Account</a></li>
             <li><a href="/Workshops/SocialPortal/src/modules/logout.php">Logout</a></li>
         </ul>

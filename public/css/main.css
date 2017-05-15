@@ -24,20 +24,20 @@
 .welcome .form h2{
     margin: 0 0 30px;
 }
-.posts {
+.posts, .message {
     margin-bottom: 60px;
 }
-.posts .nav {
+.posts .nav, .message .nav {
     background: black;
     margin-bottom: 50px;
 }
-.posts .btn {
-    margin-right: 15px;
-}
-.posts .nav li {
+.posts .nav li, .message .nav li {
     display: inline-block;
     margin-right: 10px;
     padding: 10px;
+}
+.posts .btn {
+    margin-right: 15px;
 }
 .posts .post-delete{
     text-align: center;
@@ -67,4 +67,26 @@
     margin: 10px auto;
     width: 50%;
     display: block;
+}
+.message .friend-info_item {
+    margin-bottom: 30px;
+}
+.message .friend-info_ico {
+    width: 100%;
+    max-width:200px;
+}
+.message .friends-info input {
+    display: none;
+}
+.message .friend-info_item label {
+    margin: auto;
+    text-align: center;
+    cursor: pointer;
+}
+.message .friend-info_item label:hover {
+    opacity: 0.6;
+}
+.message .show-msg {
+    min-height: 200px;
+    margin-top: 5px;
 }
