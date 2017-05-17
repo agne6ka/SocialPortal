@@ -6,4 +6,4 @@
 $serverName = 'localhost';
 $userName = 'root';
 $baseName = 'social_db';
-$password = 'coderslab';
+$password = '';

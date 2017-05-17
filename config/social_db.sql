@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 16 Maj 2017, 00:51
+-- Czas generowania: 18 Maj 2017, 00:01
 -- Wersja serwera: 5.7.18-0ubuntu0.16.04.1
 -- Wersja PHP: 7.0.15-0ubuntu0.16.04.4
 
@@ -30,9 +30,26 @@ CREATE TABLE `Messages` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `message` varchar(255) COLLATE utf8_polish_ci DEFAULT NULL,
-  `form_user` int(10) DEFAULT NULL,
+  `from_user` int(10) DEFAULT NULL,
   `msg_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `Messages`
+--
+
+INSERT INTO `Messages` (`id`, `user_id`, `message`, `from_user`, `msg_date`) VALUES
+(1, 2, 'Test', 3, '2017-05-15'),
+(2, 3, 'test test test', 2, '2017-05-17'),
+(3, 3, 'CzeÅ›Ä‡ co tam u Ciebie?', 2, '2017-05-17'),
+(4, 3, 'Hello, how are you?', 2, '2017-05-17'),
+(5, 2, 'test', 3, '2017-05-17'),
+(6, 2, 'test', 3, '2017-05-17'),
+(7, 3, 'Bla', 4, '2017-05-17'),
+(8, 4, 'Kiedy się widzimy?', 2, '2017-05-17'),
+(9, 3, '', 2, '2017-05-17'),
+(10, 3, '', 2, '2017-05-17'),
+(11, 3, '', 2, '2017-05-17');
 
 -- --------------------------------------------------------
 
@@ -87,6 +104,12 @@ INSERT INTO `Users` (`id`, `email`, `username`, `hashed_password`) VALUES
 --
 
 --
+-- Indexes for table `Messages`
+--
+ALTER TABLE `Messages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `Posts`
 --
 ALTER TABLE `Posts`
@@ -104,6 +127,11 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT dla tabeli `Messages`
+--
+ALTER TABLE `Messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT dla tabeli `Posts`
 --
