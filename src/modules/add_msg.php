@@ -10,40 +10,77 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $friendId = "";
     $showUser="";
     $msgText = "";
+    $errors = [];
 
     if($_POST['show_user'] === 'true'){
 
         if($_POST['friend_id'] != ''){
-            $friendId = $_POST['friend_id'];
+            $friendId = intval($_POST['friend_id']);
         } else {
-            die("<p>Error: You must choose person to chat.</p>");
+            $errors =+ "Error: You must choose person to chat.";
         }
     } else {
         if (strlen(trim($_POST['message'])) >= 3 && strlen(trim($_POST['message'])) <= 255) {
             $msgText = $_POST['message'];
         } else {
-            die("<p>Error: Text must have over 3 up to 255 character.</p>");
+            $errors =+ "Error: Text must have over 3 up to 255 character.";
         }
         if($_POST['friend_id'] != ''){
             $friendId = $_POST['friend_id'];
         } else {
-            die("<p>Error: You must choose person to chat.</p>");
+            $errors =+ "Error: You must choose person to chat.";
         }
     }
 
     $userId = $_SESSION['loggedUser'][1];
+
+    if ($errors){
+        echo json_encode($errors);
+    }
 
 } else {
     echo 'Check request method';
     die;
 }
 
-var_dump($_POST);
-
 if ($_POST['show_user'] === 'true'){
-    echo '<p>Edit post.</p>';
     $message = new Messages();
-    $message = $message->loadMessageByUserId($conn, $friendId);
+    $allMessages = Messages::loadAllMessages($conn);
+    $arr = array();
+
+
+    $i = 0;
+    while ($i < count($allMessages)) {
+        $getMessage = $allMessages[$i]->getMessage();
+        $msgDate = $allMessages[$i]->getMsgDate();
+        $msgUserFrom = $allMessages[$i]->getFromUser();
+        $msgUserId = $allMessages[$i]->getUserId();
+        $msgId = $allMessages[$i]->getId();
+        $user = new Users();
+        $userData = $user->loadUserById($conn, $msgUserFrom);
+        $userName = $userData->getUsername();
+
+        if ($msgUserFrom == $friendId && $userId == $msgUserId){
+            if ($allMessages != null) {
+                $arr[] = array(
+                    "id" => "$msgId",
+                    "message" => "$getMessage",
+                    "date" => "$msgDate",
+                    "user_from" => "$userName",
+                    "user_to" => "$msgUserId"
+                );
+            }
+        }
+
+        $i++;
+    }
+
+    if (count($arr) !=0 ){
+        echo json_encode($arr);
+    } else {
+        echo json_encode(['no_message'=>'There is no msg for this user']);
+    }
+
 } else {
     $message = new Messages();
     $message->setFromUser($friendId);

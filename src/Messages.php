@@ -105,7 +105,7 @@ class Messages
                 return true;
             }
         } else {
-            $sql = "UPDATE Messages SET user_id='$this->user_id', message='$this->message', form_user='$this->from_user', msg_date='$this->msg_date'WHERE id=$this->id";
+            $sql = "UPDATE Messages SET user_id='$this->user_id', message='$this->message', from_user='$this->from_user', msg_date='$this->msg_date'WHERE id=$this->id";
             $result = $conn->query($sql);
             if ($result == true) {
                 return true;
@@ -116,7 +116,7 @@ class Messages
 
     static public function loadMessageByUserId(mysqli $conn, $id)
     {
-        $sql = "SELECT * FROM Messages WHERE id=$id";
+        $sql = "SELECT * FROM Messages WHERE from_user=$id";
         $result = $conn->query($sql);
         if ($result == true && $result->num_rows == 1) {
             $row = $result->fetch_assoc();
@@ -124,7 +124,7 @@ class Messages
             $loadedMsg->id = $row['id'];
             $loadedMsg->user_id = $row['user_id'];
             $loadedMsg->message = $row['message'];
-            $loadedMsg->form_user = $row['form_user'];
+            $loadedMsg->from_user = $row['from_user'];
             $loadedMsg->msg_date = $row['msg_date'];
             return $loadedMsg;
         }
@@ -142,7 +142,7 @@ class Messages
                 $loadedMsg->id = $row['id'];
                 $loadedMsg->user_id = $row['user_id'];
                 $loadedMsg->message = $row['message'];
-                $loadedMsg->form_user = $row['form_user'];
+                $loadedMsg->from_user = $row['from_user'];
                 $loadedMsg->msg_date = $row['msg_date'];
                 $ret[] = $loadedMsg;
             }

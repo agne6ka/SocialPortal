@@ -36,15 +36,6 @@ for(var $i in $delete){
     }
 }
 
-for(var $i in $friendItems){
-    if ($friendItems[$i].hasAttribute){
-
-        $friendItems[$i].addEventListener('click', function () {
-            console.log('clicked');
-            $showMessage.click();
-        });
-    }
-}
 if ($deletePost){
     var $btnNo = $deletePost.querySelector('#cancel');
 
@@ -56,3 +47,54 @@ if ($deletePost){
         $deletePost.classList.add('hidden');
     });
 }
+
+
+for(var $i in $friendItems){
+    if ($friendItems[$i].hasAttribute){
+        $friendItems[$i].addEventListener('click', function () {
+            $showMessage.click();
+        });
+    }
+}
+
+/** Form handling **/
+
+var $form = $('#form');
+var $showInfoContainer = $('.show-msg');
+var $msgInfo = $('.show-msg_info');
+
+$form.submit(function (event) {
+    event.preventDefault();
+
+    $.ajax({
+        type: 'POST',
+        url: $form.attr('action'),
+        data: $form.serialize(),
+        dataType: 'json',
+        success: function (data) {
+            if (data.status) {
+                console.log(data);
+            } else {
+                var $msgItem = $('.message_item');
+
+                if ($msgItem.length){
+                    $msgItem.remove();
+                } else if (data.no_message){
+                    $msgInfo.text(data.no_message);
+                } else {
+                    $msgInfo.text(' ');
+                    for(var $i in data){
+                        $showInfoContainer.append(
+                            '<div class="message_item">'+
+                            '<p class="message_item__text">Message: '+data[$i].message +'</p>'+
+                            '<p class="message_item__date">Date: '+data[$i].date +'</p>'+
+                            '<p class="message_item__user">From: '+data[$i].user_from +'</p>'+
+                            '<p class="message_item__user">To: '+data[$i].user_to +'</p>'+
+                            '</div>'
+                        )
+                    }
+                }
+            }
+        }
+    });
+});

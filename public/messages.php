@@ -20,21 +20,25 @@
         </ul>
     </section>
     <section class="friends">
-        <div class="friends-info col-lg-2">
+        <div class="friends-info col-md-2">
             <h2>Chat with:</h2>
-<!--        <p class="user-info_name">--><?php //echo $_SESSION['loggedUser'][0] ?><!--</p>-->
-            <form action="../src/modules/add_msg.php" method="post">
+            <form id="form" action="../src/modules/add_msg.php" method="post">
                 <input hidden name="show_user" value="true">
                 <?php
                 $i = 0;
+                $currentUser = $_SESSION['loggedUser'][1];
                 while ($i < count($allUsers)) {
                     $usrId = $allUsers[$i]->getId();
                     $userName = $allUsers[$i]->getUserName();
-                    echo "<ul class=\"friend-info_item\" data-id=\"$usrId\">
+
+                    if ($usrId != $currentUser){
+                        echo "<ul class=\"friend-info_item\" data-id=\"$usrId\">
                             <label><input type='radio' id='friend-id' name='friend_id' value='$usrId'>
-                                <img class=\"friend-info_ico\" src=\"img/blue-user-icon.png\">$userName
+                                <img class=\"friend-info_ico\" src=\"img/blue-user-icon.png\">
+                                <p>$userName</p>
                             </label>";
-                    echo '</ul>';
+                        echo '</ul>';
+                    }
                     $i++;
                 }
                 ?>
@@ -43,33 +47,13 @@
         </div>
     </section>
     <section class="content">
-        <div class="show-msg col-lg-offset-1 col-lg-6">
-            <?php
-                if (count($allMessages) === 0){
-                    echo '<h3 class="show-msg_info">Choose a person to talk.</h3>';
-                }
-                $i = 0;
-                while ($i < count($allMessages )) {
-                    $getMessage = $allMessages[$i]->getMessage();
-                    $msgDate = $allMessages[$i]->getMsgDate();
-                    $msgUserId = $allMessages[$i]->getUserId();
-                    $msgId = $allMessages[$i]->getId();
-                    $user = new Users();
-                    $userData = $user->loadUserById($conn, $msgUserId);
-                    $userName = $userData->getUsername();
+        <div class="show-msg col-md-offset-1 col-md-6">
+                    <h3 class="show-msg_info">Choose a person to talk.</h3>
 
-                    echo "<div class=\"message_item\">
-                            <p class=\"message_item__text\">$getMessage</p>
-                            <p>$msgDate</p>
-                            <p>Created by $userName</p>";
-                    echo '</div>';
-                    $i++;
-                }
-            ?>
         </div>
     </section>
     <section class="message-form">
-        <div class="col-lg-6">
+        <div class="col-md-offset-1 col-md-8">
             <form action="../src/modules/add_msg.php" method="post">
                 <input hidden name="show_user" value="false">
                 <div class="form-group">
